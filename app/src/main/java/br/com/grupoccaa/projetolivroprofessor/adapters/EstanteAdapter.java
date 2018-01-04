@@ -42,24 +42,26 @@ public class EstanteAdapter extends RecyclerView.Adapter<EstanteAdapter.ViewHold
         }
     }
 
-    public EstanteAdapter(ArrayList<Publicacao> datasetPublicacoes) {
-        this.datasetPublicacoes = datasetPublicacoes;
+    public EstanteAdapter(Context context, List<Publicacao> listPublicacoes) {
+        this.listPublicacoes = listPublicacoes;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        this.layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(android.support.v4.R.layout.)
+        View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_publicacao,parent,false);
+        return new ViewHolder(itemview);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Publicacao publicacao = listPublicacoes.get(position);
+        holder.tituloPublicacao.setText(publicacao.getTituloPublicacao());
 
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listPublicacoes.size();
     }
 }

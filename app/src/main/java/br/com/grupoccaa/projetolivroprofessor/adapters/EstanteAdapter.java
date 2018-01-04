@@ -21,7 +21,7 @@ import br.com.grupoccaa.projetolivroprofessor.activities.ReaderActivity;
 import br.com.grupoccaa.projetolivroprofessor.models.Publicacao;
 
 /**
- * Created by gerso on 1/3/2018.
+ * Created by Gerson Cardoso on 1/3/2018.
  */
 
 public class EstanteAdapter extends RecyclerView.Adapter<EstanteAdapter.ViewHolder> {

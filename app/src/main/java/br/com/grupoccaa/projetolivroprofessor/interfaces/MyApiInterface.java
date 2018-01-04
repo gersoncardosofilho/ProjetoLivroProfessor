@@ -1,5 +1,7 @@
 package br.com.grupoccaa.projetolivroprofessor.interfaces;
 
+import java.util.List;
+
 import br.com.grupoccaa.projetolivroprofessor.models.Publicacao;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,5 +12,5 @@ import retrofit2.http.GET;
 
 public interface MyApiInterface {
     @GET("api/Publicacoes")
-    Call<Publicacao> getPublicacoes();
+    Call<List<Publicacao>> getPublicacoes();
 }

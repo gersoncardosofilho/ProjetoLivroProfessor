@@ -3,26 +3,37 @@ package br.com.grupoccaa.projetolivroprofessor.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by Gerson Cardoso on 1/3/2018.
  */
 
 public class Publicacao implements Parcelable {
 
-    private int idPublicacao;
-    private String tituloPublicacao;
-    private String urlPublicacao;
+    private int IdPublicacao;
+    private String TituloPublicacao;
+    private String UrlPublicacao;
+    private String UrlThumbnail;
+
+    public String getUrlThumbnail() {
+        return UrlThumbnail;
+    }
+
+    public void setUrlThumbnail(String urlThumbnail) {
+        UrlThumbnail = urlThumbnail;
+    }
 
     public int getIdPublicacao() {
-        return idPublicacao;
+        return IdPublicacao;
     }
 
     public void setIdPublicacao(int idPublicacao) {
-        this.idPublicacao = idPublicacao;
+        this.IdPublicacao = idPublicacao;
     }
 
     public String getTituloPublicacao() {
-        return tituloPublicacao;
+        return TituloPublicacao;
     }
 
     public void setTituloPublicacao(String tituloPublicacao) {
@@ -30,17 +41,18 @@ public class Publicacao implements Parcelable {
     }
 
     public String getUrlPublicacao() {
-        return urlPublicacao;
+        return UrlPublicacao;
     }
 
     public void setUrlPublicacao(String urlPublicacao) {
         urlPublicacao = urlPublicacao;
     }
 
-    public Publicacao(int idPublicacao, String tituloPublicacao, String urlPublicacao) {
-        this.idPublicacao = idPublicacao;
-        this.tituloPublicacao = tituloPublicacao;
-        this.urlPublicacao = urlPublicacao;
+    public Publicacao(int idPublicacao, String tituloPublicacao, String urlPublicacao, String urlThumbnail) {
+        this.IdPublicacao = idPublicacao;
+        this.TituloPublicacao = tituloPublicacao;
+        this.UrlPublicacao = urlPublicacao;
+        this.UrlThumbnail = urlThumbnail;
     }
 
     //Parcelling
@@ -52,16 +64,18 @@ public class Publicacao implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(idPublicacao);
-        parcel.writeString(tituloPublicacao);
-        parcel.writeString(urlPublicacao);
+        parcel.writeInt(IdPublicacao);
+        parcel.writeString(TituloPublicacao);
+        parcel.writeString(UrlPublicacao);
+        parcel.writeString(UrlThumbnail);
     }
 
     //Constructor for createFromParcel
     public Publicacao(Parcel in){
-        this.idPublicacao = in.readInt();
-        this.tituloPublicacao = in.readString();
-        this.urlPublicacao = in.readString();
+        this.IdPublicacao = in.readInt();
+        this.TituloPublicacao = in.readString();
+        this.UrlPublicacao = in.readString();
+        this.UrlThumbnail = in.readString();
     }
 
     public static final Parcelable.Creator<Publicacao> CREATOR = new Parcelable.Creator<Publicacao>(){

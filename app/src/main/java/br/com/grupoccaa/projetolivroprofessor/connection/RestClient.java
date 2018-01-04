@@ -1,5 +1,6 @@
 package br.com.grupoccaa.projetolivroprofessor.connection;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import br.com.grupoccaa.projetolivroprofessor.interfaces.MyApiInterface;
 import br.com.grupoccaa.projetolivroprofessor.models.Publicacao;
@@ -15,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RestClient {
-    private static final String BASE_URL = "http://lpwebapi20180103064413.azurewebsites.net/";
+    private static final String BASE_URL = "https://lpwebapi20180104013621.azurewebsites.net";
     private static final int TIMEOUT = 60000;
 
     private static RestClient instance;
@@ -43,10 +44,12 @@ public class RestClient {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        this.apiService = retrofit.create(MyApiInterface.class);
     }
 
-    public void getPublicacoes(Callback<Publicacao> callback){
-        Call<Publicacao> call = apiService.getPublicacoes();
+    public void getPublicacoes(Callback<List<Publicacao>> callback){
+        Call<List<Publicacao>> call = apiService.getPublicacoes();
         call.enqueue(callback);
     }
 }

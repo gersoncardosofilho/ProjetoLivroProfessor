@@ -9,7 +9,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
+import android.widget.ImageView;
 
 
 import java.util.ArrayList;
@@ -17,14 +19,20 @@ import java.util.List;
 
 import br.com.grupoccaa.projetolivroprofessor.R;
 import br.com.grupoccaa.projetolivroprofessor.adapters.EstanteAdapter;
+import br.com.grupoccaa.projetolivroprofessor.connection.RestClient;
 import br.com.grupoccaa.projetolivroprofessor.helper_classes.GridSpacingItemDecoration;
 import br.com.grupoccaa.projetolivroprofessor.models.Publicacao;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class EstanteActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private EstanteAdapter adapter;
     private List<Publicacao> listPublicacoes;
+    private ImageView backdropImage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,16 +44,10 @@ public class EstanteActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         listPublicacoes = new ArrayList<>();
-        adapter = new EstanteAdapter(this, listPublicacoes);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
 
         loadPublicacoes();
 
+        RestClient.initialize();
 
         //Todo load das capas dos pdfs
 //        try {
@@ -54,6 +56,15 @@ public class EstanteActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
+    }
+
+    private void montaGrid(List<Publicacao> publicacoes) {
+        adapter = new EstanteAdapter(this,publicacoes);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 
     private void initCollapsingToolbar(){
@@ -89,13 +100,26 @@ public class EstanteActivity extends AppCompatActivity {
 
         //Carrega a List<Publicacao> retrofit - getPublicacoes
 
+        RestClient.getInstance().getPublicacoes(new Callback<List<Publicacao>>() {
+            @Override
+            public void onResponse(Call<List<Publicacao>> call, Response<List<Publicacao>> response) {
+
+                listPublicacoes = response.body();
+                montaGrid(listPublicacoes);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Publicacao>> call, Throwable t) {
+                Log.i("","");
+            }
+        });
     }
 
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
-
 
 
 

@@ -29,37 +29,47 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <ImageView android:src="@drawable/collapse_image_ccaa"
                     android:id="@+id/backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
+                    android:fitsSystemWindows="false"
+                    android:scaleType="fitXY"
                     app:layout_collapseMode="parallax" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/logo_ccaa" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="20dp">
 
                     <!--Titulo backdrop-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/love_music"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="@string/backdrop_title"-->
-                        <!--android:textColor="@android:color/white"-->
-                        <!--android:textSize="@dimen/backdrop_title" />-->
+                    <TextView
+                        android:id="@+id/love_music"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estante"
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp" android:textStyle="bold" />
 
                     <!--Subtitulo backdrop-->
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="@string/backdrop_subtitle"-->
-                        <!--android:textColor="@android:color/white"-->
-                        <!--android:textSize="@dimen/backdrop_subtitle" />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Livro do Professor"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
             </RelativeLayout>

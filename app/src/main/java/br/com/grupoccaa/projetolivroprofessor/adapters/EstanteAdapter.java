@@ -1,7 +1,11 @@
 package br.com.grupoccaa.projetolivroprofessor.adapters;
 
+import android.content.Context;
+import android.media.Image;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.grupoccaa.projetolivroprofessor.R;
 import br.com.grupoccaa.projetolivroprofessor.models.Publicacao;
 
 /**
@@ -18,18 +23,21 @@ import br.com.grupoccaa.projetolivroprofessor.models.Publicacao;
 
 public class EstanteAdapter extends RecyclerView.Adapter<EstanteAdapter.ViewHolder> {
 
-    private ArrayList<Publicacao> datasetPublicacoes;
-
+    private List<Publicacao> listPublicacoes;
+    private Context context;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imagePublicacao;
-        TextView textViewTituloPublicacao;
-        CardView cardView;
+        public ImageView thumbnailPublicacao;
+        public TextView tituloPublicacao;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            tituloPublicacao = (TextView) itemView.findViewById(R.id.textViewTituloPublicacao);
+            thumbnailPublicacao = (ImageView) itemView.findViewById(R.id.thumbnailPublicacao);
 
         }
     }
@@ -40,7 +48,8 @@ public class EstanteAdapter extends RecyclerView.Adapter<EstanteAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ImageView
+        this.layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(android.support.v4.R.layout.)
     }
 
     @Override

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -31,6 +32,9 @@
             android:name=".activities.EstanteActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity android:name=".activities.ReaderActivity"></activity>
+
+        <service android:name=".helper_classes.DownloadService"/>
+
     </application>
 
 </manifest>

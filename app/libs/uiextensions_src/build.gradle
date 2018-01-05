@@ -1,0 +1,111 @@
+buildscript {
+    repositories {
+        mavenCentral()
+		jcenter()
+    }
+    dependencies {
+         classpath 'com.android.tools.build:gradle:2.2.3'
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 12
+        versionCode 5
+        versionName "5.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions{
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile files('../FoxitRDK.jar')
+    compile 'com.android.support:design:23.4.0'
+}
+
+task clearAar(type: Delete){
+    delete '../FoxitRDKUIExtensions.aar'
+}
+
+task makeAar(type: Exec){
+    dependsOn(clearAar,build)
+    def fromFile = 'build/outputs/aar/'
+    def intoFile = '../'
+    if(org.gradle.internal.os.OperatingSystem.current().windows) {
+        commandLine "cmd",
+                '-/C', 'copy', file("$fromFile/uiextensions_src-release.aar").absolutePath, file("$intoFile/FoxitRDKUIExtensions.aar")
+    }else {
+        commandLine "cp",
+                file("$fromFile/uiextensions_src-release.aar").absolutePath, file("$intoFile/FoxitRDKUIExtensions.aar")
+    }
+}
+makeAar {}.dependsOn(clearAar,build)
+
+task makeJavaDoc(type: Javadoc) {
+    List<String> mSourcePath = new ArrayList<String>();
+    mSourcePath.add("../../fsdk/app/src/main/java/com/foxit/sdk/");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/UIExtensionsManager.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/Module.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/pdfreader/impl/PDFReader.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/controls/menu/IMenuView.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/controls/menu/MoreMenuConfig.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/controls/menu/MoreMenuModule.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/controls/toolbar/IBaseItem.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/controls/toolbar/IBarsHandler.java");
+    mSourcePath.add("src/main/java/com/foxit/uiextensions/controls/propertybar/IMultiLineBar.java");
+
+    source = mSourcePath;
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    Properties properties = new Properties()
+    InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+    properties.load( inputStream )
+    //读取文件
+    def sdkDir = properties.getProperty('sdk.dir')
+    ext.androidJar = sdkDir + "/extras/android/support/annotations/android-support-annotations.jar"
+    classpath += project.files(ext.androidJar)
+
+    destinationDir = file("../../docs/api_reference_android")
+    failOnError false
+}
+
+makeJavaDoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PUBLIC
+        locale = "en"
+        title = "Document of RDK for Android"
+
+        // fsdk overview
+        Map<String,List<String>> map = new HashMap<>();
+        List<String> fsdkOverViews= new ArrayList<>();
+        fsdkOverViews.add("com.foxit.sdk");
+        fsdkOverViews.add("com.foxit.sdk.*");
+        map.put("Fsdk Packages",fsdkOverViews);
+
+        // UIExtensions overview
+        List<String> uiExtendOverViews = new ArrayList<>();
+        uiExtendOverViews.add("com.foxit.uiextensions");
+        uiExtendOverViews.add("com.foxit.uiextensions.*");
+        map.put("UIExtenstions Packages",uiExtendOverViews);
+
+        groups = map;
+    }
+}
+

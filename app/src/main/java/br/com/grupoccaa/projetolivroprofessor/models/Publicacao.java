@@ -48,6 +48,10 @@ public class Publicacao implements Parcelable {
         urlPublicacao = urlPublicacao;
     }
 
+    public Publicacao(){
+
+    }
+
     public Publicacao(int idPublicacao, String tituloPublicacao, String urlPublicacao, String urlThumbnail) {
         this.IdPublicacao = idPublicacao;
         this.TituloPublicacao = tituloPublicacao;

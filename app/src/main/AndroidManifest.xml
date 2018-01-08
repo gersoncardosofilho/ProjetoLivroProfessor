@@ -33,7 +33,7 @@
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity android:name=".activities.ReaderActivity"></activity>
 
-        <service android:name=".helper_classes.DownloadService"/>
+        <service android:name=".services.DownloadService"/>
 
     </application>
 

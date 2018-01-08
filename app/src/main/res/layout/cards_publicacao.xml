@@ -11,14 +11,15 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:elevation="3dp"
-        card_view:cardCornerRadius="0dp">
+        card_view:cardCornerRadius="0dp"
+        android:background="@color/ux_color_white">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/publicacao_cover_height"
                 android:id="@+id/thumbnailPublicacao"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -27,14 +28,29 @@
 
             <TextView
                 android:id="@+id/textViewTituloPublicacao"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/thumbnailPublicacao"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15dp"/>
+                android:textColor="@color/ux_color_white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"/>
+
+            <ProgressBar
+                android:id="@+id/progressbarDownload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTituloPublicacao"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:id="@+id/progressText" />
 
         </RelativeLayout>
 

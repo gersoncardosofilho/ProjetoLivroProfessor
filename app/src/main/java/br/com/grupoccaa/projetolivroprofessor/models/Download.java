@@ -9,13 +9,13 @@ import android.os.Parcelable;
 
 public class Download implements Parcelable {
 
-    public Download() {
+    public Download(){
+
     }
 
     private int progress;
     private int currentFileSize;
     private int totalFileSize;
-
 
     public int getProgress() {
         return progress;
@@ -47,13 +47,15 @@ public class Download implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(progress);
-        parcel.writeInt(currentFileSize);
-        parcel.writeInt(totalFileSize);
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(progress);
+        dest.writeInt(currentFileSize);
+        dest.writeInt(totalFileSize);
     }
 
-    private Download(Parcel in){
+    private Download(Parcel in) {
+
         progress = in.readInt();
         currentFileSize = in.readInt();
         totalFileSize = in.readInt();

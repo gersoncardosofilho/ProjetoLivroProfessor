@@ -10,7 +10,7 @@ import br.com.grupoccaa.projetolivroprofessor.R;
 public class SplashActivity extends AppCompatActivity {
 
     //Splash timer
-    private static int SPLASH_TIMEOUT = 3000;
+    private static int SPLASH_TIMEOUT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

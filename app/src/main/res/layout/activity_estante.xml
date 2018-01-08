@@ -59,17 +59,20 @@
                         android:id="@+id/love_music"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Estante"
+                        android:text="Welcome Teacher"
                         android:textColor="@android:color/white"
-                        android:textSize="30sp" android:textStyle="bold" />
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
 
                     <!--Subtitulo backdrop-->
+<!--
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Livro do Professor"
                         android:textColor="@android:color/white"
                         android:textSize="20sp" />
+-->
 
                 </LinearLayout>
             </RelativeLayout>
